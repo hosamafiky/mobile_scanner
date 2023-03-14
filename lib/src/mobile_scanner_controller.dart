@@ -147,6 +147,7 @@ class MobileScannerController {
   }) async {
     if (isStarting) {
       debugPrint("Called start() while starting.");
+      debugPrint("already Starting");
       return null;
     }
 
@@ -164,12 +165,13 @@ class MobileScannerController {
       switch (state) {
         case MobileScannerState.undetermined:
           bool result = false;
-
           try {
+            debugPrint(state.name);
             result =
                 await _methodChannel.invokeMethod('request') as bool? ?? false;
           } catch (error) {
             isStarting = false;
+            debugPrint("error there!");
             throw const MobileScannerException(
               errorCode: MobileScannerErrorCode.genericError,
             );
