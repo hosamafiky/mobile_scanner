@@ -319,6 +319,7 @@ class MobileScannerController {
   ///
   /// If you call this, you cannot use this controller object anymore.
   void dispose() {
+    isStarting = false;
     stop();
     events?.cancel();
     _barcodesController.close();
